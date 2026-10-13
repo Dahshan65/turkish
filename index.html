@@ -7,9 +7,7 @@
 <title>مسابقة تعلم اللغة التركية</title>
 
 <style>
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -30,15 +28,12 @@ header h1 {
   font-size: 25px;
 }
 
-header p {
-  margin: 0;
-  font-size: 15px;
-}
+header p { margin: 0; }
 
 .container {
-  max-width: 700px;
+  max-width: 720px;
   margin: 20px auto;
-  padding: 15px;
+  padding: 12px;
 }
 
 .card {
@@ -50,28 +45,28 @@ header p {
 }
 
 .cartoon {
-  width: 145px;
-  height: 145px;
+  width: 135px;
+  height: 135px;
   border-radius: 50%;
   margin: 0 auto 12px;
   background: #fff0cc;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 83px;
+  font-size: 78px;
   border: 5px solid #f4ca70;
 }
 
 .cartoon-caption {
   color: #176b52;
   font-weight: bold;
-  margin-bottom: 15px;
+  margin-bottom: 16px;
 }
 
 .stage-list {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 9px;
+  gap: 8px;
   margin-bottom: 18px;
 }
 
@@ -81,13 +76,12 @@ button {
   border: none;
   border-radius: 12px;
   padding: 13px 10px;
-  font-size: 16px;
-  transition: 0.2s;
+  font-size: 15px;
 }
 
 button:disabled {
   cursor: not-allowed;
-  opacity: 0.45;
+  opacity: 0.5;
 }
 
 .stage-button {
@@ -109,10 +103,11 @@ button:disabled {
 }
 
 .answer-button {
+  display: block;
   background: #f1f5f9;
   color: #243447;
   width: 100%;
-  margin: 6px 0;
+  margin: 7px 0;
   border: 2px solid transparent;
   text-align: center;
 }
@@ -133,11 +128,11 @@ button:disabled {
 }
 
 .word {
-  font-size: 34px;
+  font-size: 35px;
   color: #176b52;
   font-weight: bold;
   direction: ltr;
-  margin: 18px 0;
+  margin: 20px 0;
 }
 
 .question-info {
@@ -164,11 +159,10 @@ button:disabled {
   font-weight: bold;
   min-height: 28px;
   margin-top: 12px;
+  line-height: 1.8;
 }
 
-#result {
-  line-height: 1.9;
-}
+#result { line-height: 1.9; }
 
 footer {
   padding: 22px 10px;
@@ -176,22 +170,12 @@ footer {
   font-size: 14px;
 }
 
-.hidden {
-  display: none;
-}
+.hidden { display: none; }
 
-@media (max-width: 450px) {
-  .stage-list {
-    grid-template-columns: 1fr;
-  }
-
-  header h1 {
-    font-size: 21px;
-  }
-
-  .word {
-    font-size: 29px;
-  }
+@media (max-width: 480px) {
+  .stage-list { grid-template-columns: 1fr; }
+  header h1 { font-size: 21px; }
+  .word { font-size: 29px; }
 }
 </style>
 </head>
@@ -200,12 +184,12 @@ footer {
 
 <header>
   <h1>🇹🇷 مسابقة تعلم اللغة التركية</h1>
-  <p>اختبر معلوماتك وانتقل من المستوى السهل إلى الصعب</p>
+  <p>90 سؤالًا لاختبار مستواك في اللغة التركية</p>
 </header>
 
 <div class="container">
-
   <div class="card">
+
     <div class="cartoon" id="cartoon">🧑🏻‍🎓</div>
     <div class="cartoon-caption" id="cartoonCaption">
       مرحبًا بك! هيا نتعلم التركية معًا
@@ -223,8 +207,8 @@ footer {
     </div>
 
     <div id="welcome">
-      <p>اختر المرحلة وابدأ الاختبار.</p>
-      <p>تحتاج إلى الإجابة الصحيحة عن 70% من الأسئلة لاجتياز كل مرحلة.</p>
+      <p>تحتوي كل مرحلة على 30 سؤالًا بأربعة خيارات.</p>
+      <p>تحتاج إلى 21 إجابة صحيحة على الأقل لاجتياز المرحلة.</p>
       <button class="primary-button" onclick="startStage(0)">
         ابدأ المسابقة
       </button>
@@ -232,13 +216,14 @@ footer {
 
     <div id="quiz" class="hidden">
       <div class="question-info" id="stageName"></div>
+
       <div class="progress-track">
         <div class="progress-bar" id="progressBar"></div>
       </div>
-      <div class="question-info" id="questionCounter"></div>
 
+      <div class="question-info" id="questionCounter"></div>
       <div class="word" id="turkishWord"></div>
-      <p>ما معنى هذه الكلمة باللغة العربية؟</p>
+      <p>اختر المعنى الصحيح باللغة العربية:</p>
 
       <div id="answers"></div>
       <div id="feedback"></div>
@@ -251,72 +236,115 @@ footer {
   </div>
 </div>
 
-<footer>
-  إعداد وبرمجة: وائل دهشان
-</footer>
+<footer>إعداد وبرمجة: وائل دهشان</footer>
 
 <script>
 const stages = [
-  {
-    name: "المستوى السهل",
-    words: [
-      ["Merhaba", "مرحبًا"],
-      ["Teşekkürler", "شكرًا"],
-      ["Evet", "نعم"],
-      ["Hayır", "لا"],
-      ["Su", "ماء"],
-      ["Ekmek", "خبز"],
-      ["Ev", "بيت"],
-      ["Okul", "مدرسة"],
-      ["Kitap", "كتاب"],
-      ["Arkadaş", "صديق"],
-      ["Anne", "أم"],
-      ["Baba", "أب"],
-      ["Günaydın", "صباح الخير"],
-      ["İyi", "جيد"],
-      ["Güzel", "جميل"]
-    ]
-  },
-  {
-    name: "المستوى المتوسط",
-    words: [
-      ["Öğretmen", "معلّم"],
-      ["Öğrenci", "طالب"],
-      ["Hastane", "مستشفى"],
-      ["Kütüphane", "مكتبة"],
-      ["Pencere", "نافذة"],
-      ["Düşünmek", "يفكّر"],
-      ["Konuşmak", "يتكلّم"],
-      ["Anlamak", "يفهم"],
-      ["Beklemek", "ينتظر"],
-      ["Başlamak", "يبدأ"],
-      ["Bitirmek", "ينهي"],
-      ["Alışveriş", "تسوّق"],
-      ["Yolculuk", "رحلة"],
-      ["Yorgun", "متعب"],
-      ["Mutlu", "سعيد"]
-    ]
-  },
-  {
-    name: "المستوى الصعب",
-    words: [
-      ["Sorumluluk", "مسؤولية"],
-      ["Özgürlük", "حرية"],
-      ["Başarı", "نجاح"],
-      ["Gelişmek", "يتطوّر"],
-      ["Karşılaştırmak", "يقارن"],
-      ["Deneyim", "خبرة"],
-      ["Davranış", "سلوك"],
-      ["Güvenilir", "موثوق"],
-      ["Fırsat", "فرصة"],
-      ["Çevre", "بيئة"],
-      ["Amaç", "هدف"],
-      ["Karar vermek", "يتّخذ قرارًا"],
-      ["İhtiyaç", "حاجة"],
-      ["Sabırlı", "صبور"],
-      ["Bağımsızlık", "استقلال"]
-    ]
-  }
+{
+  name: "المستوى السهل",
+  words: [
+    ["Merhaba","مرحبًا"],
+    ["Teşekkürler","شكرًا"],
+    ["Evet","نعم"],
+    ["Hayır","لا"],
+    ["Su","ماء"],
+    ["Ekmek","خبز"],
+    ["Ev","بيت"],
+    ["Okul","مدرسة"],
+    ["Kitap","كتاب"],
+    ["Arkadaş","صديق"],
+    ["Anne","أم"],
+    ["Baba","أب"],
+    ["Günaydın","صباح الخير"],
+    ["İyi","جيد"],
+    ["Güzel","جميل"],
+    ["Lütfen","من فضلك"],
+    ["Hoşça kal","إلى اللقاء"],
+    ["Gün","يوم"],
+    ["Gece","ليل"],
+    ["Bugün","اليوم"],
+    ["Yarın","غدًا"],
+    ["Ben","أنا"],
+    ["Sen","أنت"],
+    ["Biz","نحن"],
+    ["Çocuk","طفل"],
+    ["Kedi","قطة"],
+    ["Köpek","كلب"],
+    ["Elma","تفاحة"],
+    ["Kitaplık","خزانة كتب"],
+    ["Masa","طاولة"]
+  ]
+},
+{
+  name: "المستوى المتوسط",
+  words: [
+    ["Öğretmen","معلّم"],
+    ["Öğrenci","طالب"],
+    ["Hastane","مستشفى"],
+    ["Kütüphane","مكتبة"],
+    ["Pencere","نافذة"],
+    ["Düşünmek","يفكّر"],
+    ["Konuşmak","يتكلّم"],
+    ["Anlamak","يفهم"],
+    ["Beklemek","ينتظر"],
+    ["Başlamak","يبدأ"],
+    ["Bitirmek","ينهي"],
+    ["Alışveriş","تسوّق"],
+    ["Yolculuk","رحلة"],
+    ["Yorgun","متعب"],
+    ["Mutlu","سعيد"],
+    ["Üzgün","حزين"],
+    ["Çalışmak","يعمل أو يدرس"],
+    ["Dinlenmek","يستريح"],
+    ["Unutmak","ينسى"],
+    ["Hatırlamak","يتذكّر"],
+    ["Görüşmek","يلتقي"],
+    ["Anlatmak","يروي أو يشرح"],
+    ["Hazırlamak","يحضّر"],
+    ["Temizlemek","ينظّف"],
+    ["Kullanmak","يستخدم"],
+    ["Öğrenmek","يتعلّم"],
+    ["Öğretmek","يعلّم"],
+    ["Yardım etmek","يساعد"],
+    ["Karşılaşmak","يصادف أو يلتقي"],
+    ["Kaybetmek","يخسر أو يفقد"]
+  ]
+},
+{
+  name: "المستوى الصعب",
+  words: [
+    ["Sorumluluk","مسؤولية"],
+    ["Özgürlük","حرية"],
+    ["Başarı","نجاح"],
+    ["Gelişmek","يتطوّر"],
+    ["Karşılaştırmak","يقارن"],
+    ["Deneyim","خبرة أو تجربة"],
+    ["Davranış","سلوك"],
+    ["Güvenilir","موثوق"],
+    ["Fırsat","فرصة"],
+    ["Çevre","بيئة أو محيط"],
+    ["Amaç","هدف أو غاية"],
+    ["Karar vermek","يتّخذ قرارًا"],
+    ["İhtiyaç","حاجة"],
+    ["Sabırlı","صبور"],
+    ["Bağımsızlık","استقلال"],
+    ["Başvurmak","يتقدّم بطلب"],
+    ["Değerlendirmek","يقيّم"],
+    ["Gereksinim","احتياج"],
+    ["Olasılık","احتمال"],
+    ["Tutum","موقف أو توجّه"],
+    ["Yaklaşım","منهج أو أسلوب"],
+    ["Öneri","اقتراح"],
+    ["Kanıt","دليل أو برهان"],
+    ["Sonuçlandırmak","ينهي أو يحسم"],
+    ["Sürdürülebilir","مستدام"],
+    ["Çelişki","تناقض"],
+    ["Varsayım","افتراض"],
+    ["Yükümlülük","التزام"],
+    ["Öngörmek","يتوقّع مسبقًا"],
+    ["Uzlaşmak","يتوصّل إلى اتفاق"]
+  ]
+}
 ];
 
 let currentStage = 0;
@@ -339,16 +367,13 @@ function shuffle(array) {
 }
 
 function updateStageButtons() {
+  const names = ["🌱 السهل", "📘 المتوسط", "🏆 الصعب"];
+
   for (let i = 0; i < 3; i++) {
     const button = document.getElementById("stageBtn" + i);
-
     button.disabled = !unlocked[i];
     button.classList.toggle("active", i === currentStage);
-
-    const names = ["🌱 السهل", "📘 المتوسط", "🏆 الصعب"];
-
-    button.textContent =
-      names[i] + (unlocked[i] ? "" : " 🔒");
+    button.textContent = names[i] + (unlocked[i] ? "" : " 🔒");
   }
 }
 
@@ -383,7 +408,7 @@ function showQuestion() {
     stages[currentStage].name;
 
   document.getElementById("questionCounter").textContent =
-    "السؤال " + (questionIndex + 1) + " من " + questions.length;
+    "السؤال " + (questionIndex + 1) + " من 30";
 
   document.getElementById("progressBar").style.width =
     (questionIndex / questions.length * 100) + "%";
@@ -409,9 +434,7 @@ function showQuestion() {
     const button = document.createElement("button");
     button.className = "answer-button";
     button.textContent = choice;
-
     button.onclick = () => checkAnswer(button, choice);
-
     answersContainer.appendChild(button);
   });
 }
@@ -445,11 +468,11 @@ function checkAnswer(button, choice) {
     button.classList.add("wrong");
 
     document.getElementById("feedback").textContent =
-      "ليست الإجابة الصحيحة. الإجابة هي: " + correctAnswer;
+      "الإجابة الصحيحة هي: " + correctAnswer;
 
     document.getElementById("cartoon").textContent = "🙂";
     document.getElementById("cartoonCaption").textContent =
-      "لا بأس، حاول مرة أخرى!";
+      "لا بأس، واصل التعلّم!";
   }
 
   document.getElementById("progressBar").style.width =
@@ -488,12 +511,12 @@ function finishStage() {
     passed ? "🏆" : "💪";
 
   document.getElementById("cartoonCaption").textContent =
-    passed ? "أحسنت! أنت رائع!" : "واصل التدريب، أنت تستطيع!";
+    passed ? "أحسنت! أنت رائع!" : "حاول مرة أخرى، أنت تستطيع!";
 
   let message = `
     <h2>${passed ? "🎉 مبارك! اجتزت المرحلة" : "حاول مرة أخرى"}</h2>
     <p>المرحلة: ${stages[currentStage].name}</p>
-    <p>إجابات صحيحة: ${score} من ${questions.length}</p>
+    <p>الإجابات الصحيحة: ${score} من 30</p>
     <p>علامتك: ${percentage}%</p>
   `;
 
@@ -512,7 +535,7 @@ function finishStage() {
   } else if (passed && currentStage === 2) {
     message += `
       <p style="color:#176b52;font-weight:bold">
-        رائع! لقد أكملت جميع مراحل المسابقة. 🏆
+        رائع! أكملت جميع مراحل المسابقة! 🏆
       </p>
     `;
   } else {
@@ -525,14 +548,12 @@ function finishStage() {
   }
 
   message += `
-    <button class="primary-button"
-      onclick="showHome()">
+    <button class="primary-button" onclick="showHome()">
       العودة إلى القائمة الرئيسية
     </button>
   `;
 
   result.innerHTML = message;
-
   updateStageButtons();
 }
 
