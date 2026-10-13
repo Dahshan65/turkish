@@ -4,250 +4,194 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#b51224">
 <title>مسابقة تعلم اللغة التركية</title>
 
 <style>
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    margin: 0;
-    font-family: Arial, Tahoma, sans-serif;
-    background: linear-gradient(160deg, #fff8f8, #f3f4f6);
-    color: #222;
-    min-height: 100vh;
+  margin: 0;
+  font-family: Tahoma, Arial, sans-serif;
+  background: linear-gradient(135deg, #e8f5e9, #e3f2fd);
+  color: #243447;
+  text-align: center;
 }
 
 header {
-    background: #b51224;
-    color: white;
-    text-align: center;
-    padding: 22px 12px;
-    border-bottom: 5px solid #8d0b19;
+  background: #176b52;
+  color: white;
+  padding: 22px 12px;
 }
 
 header h1 {
-    margin: 0 0 8px;
-    font-size: 27px;
+  margin: 0 0 8px;
+  font-size: 25px;
 }
 
 header p {
-    margin: 0;
-    font-size: 15px;
+  margin: 0;
+  font-size: 15px;
 }
 
 .container {
-    max-width: 650px;
-    margin: auto;
-    padding: 16px;
+  max-width: 700px;
+  margin: 20px auto;
+  padding: 15px;
 }
 
-.panel {
-    background: white;
-    padding: 18px;
-    margin: 14px 0;
-    border-radius: 18px;
-    box-shadow: 0 4px 15px #00000010;
+.card {
+  background: white;
+  border-radius: 20px;
+  padding: 22px 16px;
+  margin-bottom: 18px;
+  box-shadow: 0 5px 18px #00000012;
 }
 
-h2 {
-    margin-top: 0;
-    text-align: center;
+.cartoon {
+  width: 145px;
+  height: 145px;
+  border-radius: 50%;
+  margin: 0 auto 12px;
+  background: #fff0cc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 83px;
+  border: 5px solid #f4ca70;
+}
+
+.cartoon-caption {
+  color: #176b52;
+  font-weight: bold;
+  margin-bottom: 15px;
 }
 
 .stage-list {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 12px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 9px;
+  margin-bottom: 18px;
 }
 
 button {
-    border: none;
-    border-radius: 13px;
-    padding: 15px;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    font-family: inherit;
-    transition: transform .15s, opacity .15s;
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  border-radius: 12px;
+  padding: 13px 10px;
+  font-size: 16px;
+  transition: 0.2s;
 }
 
-button:active {
-    transform: scale(.98);
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
 }
 
 .stage-button {
-    background: #b51224;
-    color: white;
-    width: 100%;
+  background: #dcefe7;
+  color: #14583f;
+  font-weight: bold;
 }
 
-.stage-button:disabled {
-    background: #aaa;
-    cursor: not-allowed;
-    opacity: .65;
+.stage-button.active {
+  background: #176b52;
+  color: white;
 }
 
-.secondary {
-    background: #eeeeee;
-    color: #222;
-    width: 100%;
-    margin-top: 10px;
+.primary-button {
+  background: #176b52;
+  color: white;
+  width: 100%;
+  margin-top: 12px;
 }
 
-#quiz {
-    display: none;
+.answer-button {
+  background: #f1f5f9;
+  color: #243447;
+  width: 100%;
+  margin: 6px 0;
+  border: 2px solid transparent;
+  text-align: center;
 }
 
-.top-info {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 8px;
-    font-size: 15px;
-    font-weight: bold;
-    margin-bottom: 12px;
+.answer-button:hover:not(:disabled) {
+  background: #e0f2e9;
+  border-color: #176b52;
 }
 
-.progress-bg {
-    height: 12px;
-    background: #e8e8e8;
-    border-radius: 20px;
-    overflow: hidden;
-    margin-bottom: 20px;
+.answer-button.correct {
+  background: #d9f8df;
+  border-color: #219653;
 }
 
-#progress {
-    height: 100%;
-    width: 0%;
-    background: #b51224;
-    transition: width .25s;
+.answer-button.wrong {
+  background: #ffe0e0;
+  border-color: #d64545;
 }
 
-.word-card {
-    background: #fff1f2;
-    border: 2px solid #f2c7cc;
-    border-radius: 18px;
-    padding: 22px 12px;
-    text-align: center;
+.word {
+  font-size: 34px;
+  color: #176b52;
+  font-weight: bold;
+  direction: ltr;
+  margin: 18px 0;
 }
 
-.word-label {
-    font-size: 15px;
-    color: #666;
-    margin-bottom: 10px;
+.question-info {
+  color: #667085;
+  font-size: 14px;
 }
 
-#turkishWord {
-    font-size: 35px;
-    font-weight: bold;
-    color: #b51224;
-    direction: ltr;
-    overflow-wrap: anywhere;
-    margin: 8px 0 18px;
+.progress-track {
+  background: #e6eaf0;
+  height: 10px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 12px 0;
 }
 
-.listen-button {
-    background: #b51224;
-    color: white;
-    font-size: 17px;
-    padding: 12px 22px;
-}
-
-#options {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 11px;
-    margin-top: 20px;
-}
-
-.option-button {
-    width: 100%;
-    background: #f1f1f1;
-    color: #222;
-    border: 2px solid #e4e4e4;
-    min-height: 58px;
-    font-size: 19px;
-}
-
-.option-button:disabled {
-    cursor: default;
-    opacity: 1;
-}
-
-.option-button.correct {
-    background: #d8f5df;
-    border-color: #269448;
-    color: #155d2b;
-}
-
-.option-button.wrong {
-    background: #ffe0e0;
-    border-color: #cc3333;
-    color: #8b1111;
+.progress-bar {
+  height: 100%;
+  width: 0;
+  background: #2eaa73;
+  transition: width 0.3s;
 }
 
 #feedback {
-    text-align: center;
-    min-height: 35px;
-    font-size: 20px;
-    font-weight: bold;
-    margin-top: 18px;
-}
-
-#retryButton,
-#nextButton,
-#restartButton {
-    display: none;
-    width: 100%;
-    margin-top: 12px;
-    color: white;
-    background: #b51224;
+  font-weight: bold;
+  min-height: 28px;
+  margin-top: 12px;
 }
 
 #result {
-    display: none;
-    text-align: center;
-}
-
-#result h2 {
-    color: #b51224;
-}
-
-#resultScore {
-    font-size: 30px;
-    font-weight: bold;
-    margin: 20px 0;
+  line-height: 1.9;
 }
 
 footer {
-    text-align: center;
-    padding: 20px 10px;
-    color: #555;
-    font-size: 14px;
+  padding: 22px 10px;
+  color: #52616b;
+  font-size: 14px;
 }
 
-.small-note {
-    font-size: 13px;
-    line-height: 1.8;
-    color: #666;
-    text-align: center;
+.hidden {
+  display: none;
 }
 
-@media (max-width: 380px) {
-    header h1 {
-        font-size: 23px;
-    }
+@media (max-width: 450px) {
+  .stage-list {
+    grid-template-columns: 1fr;
+  }
 
-    #turkishWord {
-        font-size: 29px;
-    }
+  header h1 {
+    font-size: 21px;
+  }
 
-    button {
-        font-size: 17px;
-    }
+  .word {
+    font-size: 29px;
+  }
 }
 </style>
 </head>
@@ -255,828 +199,356 @@ footer {
 <body>
 
 <header>
-    <h1>🇹🇷 مسابقة تعلم اللغة التركية</h1>
-    <p>تعلّم الكلمات التركية بطريقة ممتعة</p>
+  <h1>🇹🇷 مسابقة تعلم اللغة التركية</h1>
+  <p>اختبر معلوماتك وانتقل من المستوى السهل إلى الصعب</p>
 </header>
 
-<main class="container">
+<div class="container">
 
-    <section id="home" class="panel">
-        <h2>اختر المرحلة</h2>
+  <div class="card">
+    <div class="cartoon" id="cartoon">🧑🏻‍🎓</div>
+    <div class="cartoon-caption" id="cartoonCaption">
+      مرحبًا بك! هيا نتعلم التركية معًا
+    </div>
 
-        <div class="stage-list">
-            <button class="stage-button" id="easyButton"
-                onclick="startStage('easy')">
-                المرحلة الأولى: سهلة
-            </button>
+    <div class="stage-list">
+      <button class="stage-button active" id="stageBtn0"
+        onclick="startStage(0)">🌱 السهل</button>
 
-            <button class="stage-button" id="mediumButton"
-                onclick="startStage('medium')" disabled>
-                المرحلة الثانية: متوسطة 🔒
-            </button>
+      <button class="stage-button" id="stageBtn1"
+        onclick="startStage(1)" disabled>📘 المتوسط 🔒</button>
 
-            <button class="stage-button" id="hardButton"
-                onclick="startStage('hard')" disabled>
-                المرحلة الثالثة: صعبة 🔒
-            </button>
-        </div>
+      <button class="stage-button" id="stageBtn2"
+        onclick="startStage(2)" disabled>🏆 الصعب 🔒</button>
+    </div>
 
-        <p class="small-note">
-            تحتوي كل مرحلة على 100 كلمة.
-            أجب إجابة صحيحة للانتقال إلى السؤال التالي.
-            يلزم الحصول على 70% على الأقل لاجتياز المرحلة.
-        </p>
-    </section>
+    <div id="welcome">
+      <p>اختر المرحلة وابدأ الاختبار.</p>
+      <p>تحتاج إلى الإجابة الصحيحة عن 70% من الأسئلة لاجتياز كل مرحلة.</p>
+      <button class="primary-button" onclick="startStage(0)">
+        ابدأ المسابقة
+      </button>
+    </div>
 
-    <section id="quiz" class="panel">
-        <div class="top-info">
-            <span id="stageName"></span>
-            <span id="questionCount"></span>
-            <span id="scoreText">النقاط: 0</span>
-        </div>
+    <div id="quiz" class="hidden">
+      <div class="question-info" id="stageName"></div>
+      <div class="progress-track">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+      <div class="question-info" id="questionCounter"></div>
 
-        <div class="progress-bg">
-            <div id="progress"></div>
-        </div>
+      <div class="word" id="turkishWord"></div>
+      <p>ما معنى هذه الكلمة باللغة العربية؟</p>
 
-        <div class="word-card">
-            <div class="word-label">اختر معنى الكلمة التركية:</div>
+      <div id="answers"></div>
+      <div id="feedback"></div>
 
-            <div id="turkishWord" lang="tr">Merhaba</div>
+      <button class="primary-button hidden" id="nextButton"
+        onclick="nextQuestion()">السؤال التالي ←</button>
+    </div>
 
-            <button class="listen-button" onclick="speakCurrentWord()">
-                🔊 استمع إلى الكلمة
-            </button>
-        </div>
-
-        <div id="options"></div>
-
-        <div id="feedback" aria-live="polite"></div>
-
-        <button id="retryButton" onclick="retryQuestion()">
-            حاول مرة أخرى
-        </button>
-
-        <button id="nextButton" onclick="nextQuestion()">
-            السؤال التالي ←
-        </button>
-
-        <button class="secondary" onclick="goHome()">
-            العودة إلى المراحل
-        </button>
-    </section>
-
-    <section id="result" class="panel">
-        <h2 id="resultTitle"></h2>
-        <div id="resultScore"></div>
-        <p id="resultMessage"></p>
-
-        <button id="restartButton" onclick="restartStage()">
-            إعادة المرحلة
-        </button>
-
-        <button class="stage-button" onclick="goHome()">
-            العودة إلى المراحل
-        </button>
-    </section>
-
-</main>
+    <div id="result" class="hidden"></div>
+  </div>
+</div>
 
 <footer>
-    تصميم وبرمجة: وائل دهشان
+  إعداد وبرمجة: وائل دهشان
 </footer>
 
 <script>
-"use strict";
+const stages = [
+  {
+    name: "المستوى السهل",
+    words: [
+      ["Merhaba", "مرحبًا"],
+      ["Teşekkürler", "شكرًا"],
+      ["Evet", "نعم"],
+      ["Hayır", "لا"],
+      ["Su", "ماء"],
+      ["Ekmek", "خبز"],
+      ["Ev", "بيت"],
+      ["Okul", "مدرسة"],
+      ["Kitap", "كتاب"],
+      ["Arkadaş", "صديق"],
+      ["Anne", "أم"],
+      ["Baba", "أب"],
+      ["Günaydın", "صباح الخير"],
+      ["İyi", "جيد"],
+      ["Güzel", "جميل"]
+    ]
+  },
+  {
+    name: "المستوى المتوسط",
+    words: [
+      ["Öğretmen", "معلّم"],
+      ["Öğrenci", "طالب"],
+      ["Hastane", "مستشفى"],
+      ["Kütüphane", "مكتبة"],
+      ["Pencere", "نافذة"],
+      ["Düşünmek", "يفكّر"],
+      ["Konuşmak", "يتكلّم"],
+      ["Anlamak", "يفهم"],
+      ["Beklemek", "ينتظر"],
+      ["Başlamak", "يبدأ"],
+      ["Bitirmek", "ينهي"],
+      ["Alışveriş", "تسوّق"],
+      ["Yolculuk", "رحلة"],
+      ["Yorgun", "متعب"],
+      ["Mutlu", "سعيد"]
+    ]
+  },
+  {
+    name: "المستوى الصعب",
+    words: [
+      ["Sorumluluk", "مسؤولية"],
+      ["Özgürlük", "حرية"],
+      ["Başarı", "نجاح"],
+      ["Gelişmek", "يتطوّر"],
+      ["Karşılaştırmak", "يقارن"],
+      ["Deneyim", "خبرة"],
+      ["Davranış", "سلوك"],
+      ["Güvenilir", "موثوق"],
+      ["Fırsat", "فرصة"],
+      ["Çevre", "بيئة"],
+      ["Amaç", "هدف"],
+      ["Karar vermek", "يتّخذ قرارًا"],
+      ["İhtiyaç", "حاجة"],
+      ["Sabırlı", "صبور"],
+      ["Bağımsızlık", "استقلال"]
+    ]
+  }
+];
 
-/*
-  الكلمات مكتوبة باللغة التركية، ومعانيها باللغة العربية.
-  الصوت المستخدم للكلمات والتعليقات هو tr-TR فقط.
-*/
-
-const easyRaw = `
-Merhaba|مرحبا
-Günaydın|صباح الخير
-İyi akşamlar|مساء الخير
-İyi geceler|تصبح على خير
-Hoşça kal|مع السلامة
-Güle güle|إلى اللقاء
-Evet|نعم
-Hayır|لا
-Lütfen|من فضلك
-Teşekkürler|شكرا
-Özür dilerim|أنا آسف
-Tamam|حسنا
-Merak|فضول
-Ben|أنا
-Sen|أنت
-O|هو أو هي
-Biz|نحن
-Siz|أنتم
-Onlar|هم
-Anne|أم
-Baba|أب
-Çocuk|طفل
-Kız|بنت
-Erkek|ولد
-Aile|عائلة
-Arkadaş|صديق
-Öğretmen|معلم
-Öğrenci|طالب
-Doktor|طبيب
-Ev|بيت
-Okul|مدرسة
-Kitap|كتاب
-Kalem|قلم
-Defter|دفتر
-Masa|طاولة
-Sandalye|كرسي
-Kapı|باب
-Pencere|نافذة
-Oda|غرفة
-Mutfak|مطبخ
-Yatak|سرير
-Su|ماء
-Ekmek|خبز
-Süt|حليب
-Çay|شاي
-Elma|تفاحة
-Muz|موز
-Portakal|برتقال
-Yemek|طعام
-El|يد
-Ayak|قدم
-Baş|رأس
-Göz|عين
-Kulak|أذن
-Burun|أنف
-Ağız|فم
-Saç|شعر
-Kalp|قلب
-Güneş|شمس
-Ay|قمر
-Yıldız|نجمة
-Gökyüzü|سماء
-Deniz|بحر
-Dağ|جبل
-Ağaç|شجرة
-Çiçek|زهرة
-Kedi|قطة
-Köpek|كلب
-Kuş|طائر
-Balık|سمكة
-At|حصان
-Araba|سيارة
-Otobüs|حافلة
-Tren|قطار
-Uçak|طائرة
-Yol|طريق
-Şehir|مدينة
-Köy|قرية
-Bugün|اليوم
-Yarın|غدا
-Dün|أمس
-Sabah|صباح
-Akşam|مساء
-Gece|ليل
-Gün|يوم
-Hafta|أسبوع
-Ay|شهر
-Yıl|سنة
-Bir|واحد
-İki|اثنان
-Üç|ثلاثة
-Dört|أربعة
-Beş|خمسة
-Altı|ستة
-Yedi|سبعة
-Sekiz|ثمانية
-Dokuz|تسعة
-On|عشرة
-Büyük|كبير
-Küçük|صغير
-Güzel|جميل
-İyi|جيد
-Kötü|سيئ
-Yeni|جديد
-Eski|قديم
-Sıcak|حار
-Soğuk|بارد
-Hızlı|سريع
-Yavaş|بطيء
-Mutlu|سعيد
-Üzgün|حزين
-Aç|جائع
-Tok|شبعان
-Yorgun|متعب
-Hasta|مريض
-Gel|تعال
-Git|اذهب
-Bak|انظر
-Dinle|استمع
-Oku|اقرأ
-Yaz|اكتب
-Konuş|تحدث
-Oyna|العب
-Uyu|نم
-Kalk|انهض
-Ye|كُل
-İç|اشرب
-Al|خذ
-Ver|أعط
-Aç|افتح
-Kapat|أغلق
-Sev|أحب
-Bil|اعرف
-Anla|افهم
-`;
-
-const mediumRaw = `
-Başlamak|يبدأ
-Bitirmek|ينهي
-Öğrenmek|يتعلم
-Öğretmek|يعلّم
-Anlatmak|يشرح
-Anlamak|يفهم
-Hatırlamak|يتذكر
-Unutmak|ينسى
-Düşünmek|يفكر
-İnanmak|يؤمن
-İstemek|يريد
-Gerekmek|يلزم
-Denemek|يحاول
-Başarmak|ينجح
-Kaybetmek|يخسر
-Kazanmak|يفوز
-Seçmek|يختار
-Değiştirmek|يغيّر
-Hazırlamak|يحضّر
-Kullanmak|يستخدم
-Araştırmak|يبحث
-Karşılaştırmak|يقارن
-Açıklamak|يوضح
-Tartışmak|يناقش
-Katılmak|يشارك
-Ayrılmak|ينفصل
-Beklemek|ينتظر
-Buluşmak|يلتقي
-Tanışmak|يتعارف
-Görüşmek|يتقابل
-Yardım|مساعدة
-Öneri|اقتراح
-Düşünce|فكرة
-Fikir|رأي
-Sebep|سبب
-Sonuç|نتيجة
-Amaç|هدف
-Yöntem|طريقة
-Örnek|مثال
-Bilgi|معلومة
-Deneyim|خبرة
-Başarı|نجاح
-Hata|خطأ
-Doğru|صحيح
-Yanlış|خاطئ
-Soru|سؤال
-Cevap|إجابة
-Açıklama|توضيح
-Karar|قرار
-Fırsat|فرصة
-İhtiyaç|حاجة
-İstek|رغبة
-Güven|ثقة
-Saygı|احترام
-Sevgi|محبة
-Dostluk|صداقة
-Mutluluk|سعادة
-Üzüntü|حزن
-Korku|خوف
-Umut|أمل
-Sabır|صبر
-Özgürlük|حرية
-Sorumluluk|مسؤولية
-Görev|مهمة
-Kural|قاعدة
-Kanun|قانون
-Hak|حق
-Adalet|عدالة
-Eşitlik|مساواة
-Toplum|مجتمع
-Kültür|ثقافة
-Gelenek|تقليد
-Tarih|تاريخ
-Gelecek|مستقبل
-Geçmiş|ماض
-Şimdi|الآن
-Bazen|أحيانا
-Genellikle|عادة
-Nadiren|نادرا
-Daima|دائما
-Henüz|حتى الآن
-Çünkü|لأن
-Fakat|لكن
-Ancak|غير أن
-Bu yüzden|لذلك
-Buna rağmen|على الرغم من ذلك
-Örneğin|على سبيل المثال
-Ayrıca|بالإضافة إلى ذلك
-Özellikle|خصوصا
-Belki|ربما
-Kesinlikle|بالتأكيد
-Gerçekten|حقا
-Aslında|في الحقيقة
-Birlikte|معا
-Yalnız|وحيد
-Dikkatli|حذر
-Dikkatsiz|مهمل
-Dürüst|صادق
-Nazik|لطيف
-Kibar|مهذب
-Cesur|شجاع
-Sabırlı|صبور
-Tembel|كسول
-Çalışkan|مجتهد
-Başarılı|ناجح
-Ünlü|مشهور
-Önemli|مهم
-Gerekli|ضروري
-Mümkün|ممكن
-İmkânsız|مستحيل
-Kolay|سهل
-Zor|صعب
-Farklı|مختلف
-Benzer|مشابه
-Yeterli|كاف
-Eksik|ناقص
-Fazla|زائد
-Dikkat|انتباه
-İlişki|علاقة
-Davranış|سلوك
-Alışkanlık|عادة
-Gelişmek|يتطور
-İlerlemek|يتقدم
-Üretmek|ينتج
-Tüketmek|يستهلك
-Paylaşmak|يتشارك
-Korunmak|يحتمي
-Korumak|يحمي
-Kurtarmak|ينقذ
-Ulaşmak|يصل
-Ulaşım|مواصلات
-Çevre|بيئة
-Doğa|طبيعة
-Hava|طقس
-Yağmur|مطر
-Rüzgâr|رياح
-Bulut|سحابة
-Fırtına|عاصفة
-Sıcaklık|درجة الحرارة
-`;
-
-const hardRaw = `
-Değerlendirmek|يقيّم
-Yorumlamak|يفسّر
-Kanıtlamak|يثبت
-Savunmak|يدافع
-Eleştirmek|ينتقد
-Reddetmek|يرفض
-Kabul etmek|يقبل
-Varsaymak|يفترض
-Öngörmek|يتنبأ
-Belirlemek|يحدد
-Saptamak|يرصد
-Tanımlamak|يعرّف
-Sınıflandırmak|يصنّف
-Çözümlemek|يحلل
-İncelemek|يفحص
-Derinleşmek|يتعمق
-Geliştirmek|يطوّر
-Gerçekleştirmek|يحقق
-Uygulamak|يطبّق
-Yönetmek|يدير
-Yönlendirmek|يوجّه
-Denetlemek|يراقب
-Sürdürmek|يواصل
-Engellemek|يمنع
-Önlemek|يحول دون
-Ortaya çıkarmak|يكشف
-Göz önünde bulundurmak|يأخذ بعين الاعتبار
-Dikkate almak|يراعي
-İfade etmek|يعبّر
-İma etmek|يلمح
-Vurgulamak|يؤكد
-Çürütmek|يدحض
-Uzlaşmak|يتوصل إلى اتفاق
-Anlaşmazlık|خلاف
-Çelişki|تناقض
-Tutarlılık|اتساق
-Belirsizlik|غموض
-Olasılık|احتمال
-Varsayım|افتراض
-Yaklaşım|منهج
-Bakış açısı|وجهة نظر
-Perspektif|منظور
-İçerik|محتوى
-Kapsam|نطاق
-Bağlam|سياق
-Kavram|مفهوم
-İlke|مبدأ
-Ölçüt|معيار
-Dayanak|أساس
-Gerekçe|مبرر
-Kanıt|دليل
-Bulgular|نتائج البحث
-Veri|بيانات
-İstatistik|إحصاء
-Eğilim|اتجاه
-Etki|تأثير
-Katkı|مساهمة
-Sonuçlandırmak|يستنتج
-Çıkarım|استنتاج
-Öncelik|أولوية
-Yükümlülük|التزام
-Yetki|صلاحية
-Sınırlama|تقييد
-Kısıtlamak|يقيّد
-Muafiyet|إعفاء
-İstisna|استثناء
-Zorunluluk|ضرورة
-Özerklik|استقلالية
-Bağımsızlık|استقلال
-Sürdürülebilirlik|استدامة
-Verimlilik|كفاءة
-Etkinlik|فاعلية
-Kaynak|مصدر
-Dağılım|توزيع
-Denge|توازن
-Dönüşüm|تحول
-Değişken|متغير
-Süreç|عملية
-Aşama|مرحلة
-Eşik|عتبة
-Eğitim|تعليم
-Öğretim|تدريس
-Müfredat|منهاج
-Akademik|أكاديمي
-Araştırma|بحث
-Yayın|منشور
-Makale|مقالة
-Tez|أطروحة
-Kuram|نظرية
-Kuramsal|نظري
-Uygulamalı|تطبيقي
-Yöntemsel|منهجي
-Nitelik|خاصية
-Nicelik|كمية
-Gözlem|ملاحظة
-Deney|تجربة
-Hipotez|فرضية
-Değişim|تغيير
-İlerleme|تقدم
-Yenilik|ابتكار
-Yaratıcılık|إبداع
-Eleştirel|نقدي
-Analitik|تحليلي
-Mantıksal|منطقي
-Tutarlı|متسق
-Kapsamlı|شامل
-Ayrıntılı|مفصل
-Karmaşık|معقد
-Soyut|مجرد
-Somut|ملموس
-Özgün|أصيل
-Nesnel|موضوعي
-Öznel|ذاتي
-Tarafsız|محايد
-Önyargı|تحيز مسبق
-İhtimal|احتمال
-Tesadüf|مصادفة
-Zorunlu|إلزامي
-İsteğe bağlı|اختياري
-Geçerlilik|صلاحية
-Güvenilirlik|موثوقية
-Tutum|موقف
-Algı|إدراك
-Bilinç|وعي
-Farkındalık|وعي وإدراك
-Motivasyon|دافع
-Özveri|تفان
-Kararlılık|عزيمة
-Direnç|مقاومة
-Dayanıklılık|قدرة على التحمل
-Uyum|توافق
-Çatışma|صراع
-İş birliği|تعاون
-Uzlaşma|توافق
-İletişim|تواصل
-Etkileşim|تفاعل
-Sorumluluk almak|يتحمل المسؤولية
-İnisiyatif|مبادرة
-Öngörü|استشراف
-Strateji|استراتيجية
-Planlama|تخطيط
-Uygunluk|ملاءمة
-Ölçek|مقياس
-`;
-
-function parseWords(raw) {
-    return raw.trim().split("\n")
-        .map(line => line.trim())
-        .filter(Boolean)
-        .map(line => {
-            const separator = line.indexOf("|");
-            return {
-                tr: line.slice(0, separator).trim(),
-                ar: line.slice(separator + 1).trim()
-            };
-        })
-        .filter(item => item.tr && item.ar);
-}
-
-const stages = {
-    easy: {
-        name: "المرحلة الأولى: سهلة",
-        words: parseWords(easyRaw)
-    },
-    medium: {
-        name: "المرحلة الثانية: متوسطة",
-        words: parseWords(mediumRaw)
-    },
-    hard: {
-        name: "المرحلة الثالثة: صعبة",
-        words: parseWords(hardRaw)
-    }
-};
-
-let currentStage = "easy";
+let currentStage = 0;
 let questions = [];
 let questionIndex = 0;
 let score = 0;
 let answered = false;
-let currentOptions = [];
-let correctOptionIndex = 0;
 
-const completed = {
-    easy: false,
-    medium: false,
-    hard: false
-};
-
-/* اختيار صوت تركي فقط؛ لا يوجد بديل إنجليزي */
-
-function speakTurkish(text) {
-    if (!("speechSynthesis" in window)) {
-        return;
-    }
-
-    window.speechSynthesis.cancel();
-
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = "tr-TR";
-    utterance.rate = 0.85;
-    utterance.pitch = 1;
-
-    const voices = window.speechSynthesis.getVoices();
-    const turkishVoice = voices.find(voice =>
-        voice.lang.toLowerCase().startsWith("tr")
-    );
-
-    if (turkishVoice) {
-        utterance.voice = turkishVoice;
-    }
-
-    window.speechSynthesis.speak(utterance);
-}
-
-function speakCurrentWord() {
-    if (questions[questionIndex]) {
-        speakTurkish(questions[questionIndex].tr);
-    }
-}
+let unlocked = [true, false, false];
 
 function shuffle(array) {
-    const result = [...array];
+  const result = [...array];
 
-    for (let i = result.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [result[i], result[j]] = [result[j], result[i]];
-    }
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
 
-    return result;
-}
-
-function startStage(stageKey) {
-    if (stageKey === "medium" && !completed.easy) return;
-    if (stageKey === "hard" && !completed.medium) return;
-
-    currentStage = stageKey;
-    questionIndex = 0;
-    score = 0;
-    answered = false;
-
-    questions = shuffle(stages[stageKey].words);
-
-    document.getElementById("home").style.display = "none";
-    document.getElementById("result").style.display = "none";
-    document.getElementById("quiz").style.display = "block";
-
-    renderQuestion();
-}
-
-function renderQuestion() {
-    if (questionIndex >= questions.length) {
-        finishStage();
-        return;
-    }
-
-    answered = false;
-
-    const question = questions[questionIndex];
-
-    document.getElementById("stageName").textContent =
-        stages[currentStage].name;
-
-    document.getElementById("questionCount").textContent =
-        `السؤال ${questionIndex + 1} من ${questions.length}`;
-
-    document.getElementById("scoreText").textContent =
-        `النقاط: ${score}`;
-
-    document.getElementById("progress").style.width =
-        `${(questionIndex / questions.length) * 100}%`;
-
-    document.getElementById("turkishWord").textContent = question.tr;
-
-    document.getElementById("feedback").textContent = "";
-    document.getElementById("retryButton").style.display = "none";
-    document.getElementById("nextButton").style.display = "none";
-
-    const otherAnswers = shuffle(
-        stages[currentStage].words
-            .filter(item => item.ar !== question.ar)
-            .map(item => item.ar)
-            .filter((value, index, array) =>
-                array.indexOf(value) === index
-            )
-    ).slice(0, 2);
-
-    currentOptions = shuffle([
-        question.ar,
-        ...otherAnswers
-    ]);
-
-    correctOptionIndex = currentOptions.indexOf(question.ar);
-
-    const optionsContainer = document.getElementById("options");
-    optionsContainer.innerHTML = "";
-
-    currentOptions.forEach((answer, index) => {
-        const button = document.createElement("button");
-        button.className = "option-button";
-        button.textContent = answer;
-        button.onclick = () => chooseAnswer(index);
-        optionsContainer.appendChild(button);
-    });
-}
-
-function chooseAnswer(index) {
-    if (answered) return;
-
-    const buttons = [
-        ...document.querySelectorAll(".option-button")
-    ];
-
-    if (index === correctOptionIndex) {
-        answered = true;
-        score++;
-
-        buttons.forEach(button => {
-            button.disabled = true;
-        });
-
-        buttons[index].classList.add("correct");
-
-        document.getElementById("scoreText").textContent =
-            `النقاط: ${score}`;
-
-        document.getElementById("feedback").textContent = "Harika!";
-
-        // التعليق الصوتي باللغة التركية فقط
-        speakTurkish("Harika!");
-
-        document.getElementById("nextButton").style.display = "block";
-        document.getElementById("retryButton").style.display = "none";
-    } else {
-        buttons[index].classList.add("wrong");
-
-        // يسمح للطفل بمحاولة أخرى للسؤال نفسه
-        buttons[index].disabled = true;
-
-        document.getElementById("feedback").textContent =
-            "Sorun değil, tekrar dene!";
-
-        // التعليق الصوتي باللغة التركية فقط
-        speakTurkish("Sorun değil, tekrar dene!");
-
-        document.getElementById("retryButton").style.display = "block";
-    }
-}
-
-function retryQuestion() {
-    document.getElementById("feedback").textContent = "";
-    document.getElementById("retryButton").style.display = "none";
-
-    const buttons = [
-        ...document.querySelectorAll(".option-button")
-    ];
-
-    buttons.forEach(button => {
-        if (!button.classList.contains("wrong")) {
-            button.disabled = false;
-        }
-    });
-}
-
-function nextQuestion() {
-    if (!answered) return;
-
-    questionIndex++;
-    renderQuestion();
-}
-
-function finishStage() {
-    window.speechSynthesis?.cancel();
-
-    document.getElementById("quiz").style.display = "none";
-    document.getElementById("result").style.display = "block";
-
-    const total = questions.length;
-    const percentage = Math.round((score / total) * 100);
-    const passed = percentage >= 70;
-
-    document.getElementById("resultTitle").textContent =
-        passed ? "أحسنت! اجتزت المرحلة 🎉" : "حاول مرة أخرى";
-
-    document.getElementById("resultScore").textContent =
-        `${score} / ${total} — ${percentage}%`;
-
-    if (passed) {
-        completed[currentStage] = true;
-
-        document.getElementById("resultMessage").textContent =
-            "ممتاز! يمكنك الانتقال إلى المرحلة التالية.";
-
-        speakTurkish("Tebrikler! Çok başarılısın!");
-
-        document.getElementById("restartButton").style.display = "none";
-
-        updateStageButtons();
-    } else {
-        document.getElementById("resultMessage").textContent =
-            "تحتاج إلى 70% على الأقل لاجتياز المرحلة. أعد المحاولة لتحسين نتيجتك.";
-
-        speakTurkish("Sorun değil, tekrar dene!");
-
-        document.getElementById("restartButton").style.display = "block";
-    }
+  return result;
 }
 
 function updateStageButtons() {
-    document.getElementById("mediumButton").disabled =
-        !completed.easy;
+  for (let i = 0; i < 3; i++) {
+    const button = document.getElementById("stageBtn" + i);
 
-    document.getElementById("hardButton").disabled =
-        !completed.medium;
+    button.disabled = !unlocked[i];
+    button.classList.toggle("active", i === currentStage);
 
-    document.getElementById("mediumButton").textContent =
-        completed.easy
-            ? "المرحلة الثانية: متوسطة"
-            : "المرحلة الثانية: متوسطة 🔒";
+    const names = ["🌱 السهل", "📘 المتوسط", "🏆 الصعب"];
 
-    document.getElementById("hardButton").textContent =
-        completed.medium
-            ? "المرحلة الثالثة: صعبة"
-            : "المرحلة الثالثة: صعبة 🔒";
+    button.textContent =
+      names[i] + (unlocked[i] ? "" : " 🔒");
+  }
 }
 
-function restartStage() {
-    startStage(currentStage);
+function startStage(stageIndex) {
+  if (!unlocked[stageIndex]) return;
+
+  currentStage = stageIndex;
+  questionIndex = 0;
+  score = 0;
+  answered = false;
+
+  questions = shuffle(stages[currentStage].words);
+
+  document.getElementById("welcome").classList.add("hidden");
+  document.getElementById("result").classList.add("hidden");
+  document.getElementById("quiz").classList.remove("hidden");
+
+  document.getElementById("cartoon").textContent = "🧑🏻‍🎓";
+  document.getElementById("cartoonCaption").textContent =
+    "بالتوفيق! اختر المعنى الصحيح";
+
+  updateStageButtons();
+  showQuestion();
 }
 
-function goHome() {
-    window.speechSynthesis?.cancel();
+function showQuestion() {
+  answered = false;
 
-    document.getElementById("quiz").style.display = "none";
-    document.getElementById("result").style.display = "none";
-    document.getElementById("home").style.display = "block";
+  const question = questions[questionIndex];
 
-    updateStageButtons();
+  document.getElementById("stageName").textContent =
+    stages[currentStage].name;
+
+  document.getElementById("questionCounter").textContent =
+    "السؤال " + (questionIndex + 1) + " من " + questions.length;
+
+  document.getElementById("progressBar").style.width =
+    (questionIndex / questions.length * 100) + "%";
+
+  document.getElementById("turkishWord").textContent = question[0];
+
+  document.getElementById("feedback").textContent = "";
+  document.getElementById("nextButton").classList.add("hidden");
+
+  const answersContainer = document.getElementById("answers");
+  answersContainer.innerHTML = "";
+
+  const otherWords = stages.flatMap(stage => stage.words)
+    .filter(word => word[1] !== question[1]);
+
+  const wrongAnswers = shuffle(otherWords)
+    .slice(0, 3)
+    .map(word => word[1]);
+
+  const choices = shuffle([question[1], ...wrongAnswers]);
+
+  choices.forEach(choice => {
+    const button = document.createElement("button");
+    button.className = "answer-button";
+    button.textContent = choice;
+
+    button.onclick = () => checkAnswer(button, choice);
+
+    answersContainer.appendChild(button);
+  });
 }
 
-/* تجهيز الأصوات عند تحميل الصفحة */
-if ("speechSynthesis" in window) {
-    window.speechSynthesis.getVoices();
+function checkAnswer(button, choice) {
+  if (answered) return;
+
+  answered = true;
+
+  const correctAnswer = questions[questionIndex][1];
+  const buttons = document.querySelectorAll(".answer-button");
+
+  buttons.forEach(btn => {
+    btn.disabled = true;
+
+    if (btn.textContent === correctAnswer) {
+      btn.classList.add("correct");
+    }
+  });
+
+  if (choice === correctAnswer) {
+    score++;
+
+    document.getElementById("feedback").textContent =
+      "أحسنت! الإجابة صحيحة 🌟";
+
+    document.getElementById("cartoon").textContent = "🥳";
+    document.getElementById("cartoonCaption").textContent =
+      "Harika! أحسنت!";
+  } else {
+    button.classList.add("wrong");
+
+    document.getElementById("feedback").textContent =
+      "ليست الإجابة الصحيحة. الإجابة هي: " + correctAnswer;
+
+    document.getElementById("cartoon").textContent = "🙂";
+    document.getElementById("cartoonCaption").textContent =
+      "لا بأس، حاول مرة أخرى!";
+  }
+
+  document.getElementById("progressBar").style.width =
+    ((questionIndex + 1) / questions.length * 100) + "%";
+
+  document.getElementById("nextButton").classList.remove("hidden");
+
+  document.getElementById("nextButton").textContent =
+    questionIndex === questions.length - 1
+      ? "عرض النتيجة"
+      : "السؤال التالي ←";
 }
+
+function nextQuestion() {
+  if (!answered) return;
+
+  questionIndex++;
+
+  if (questionIndex < questions.length) {
+    showQuestion();
+  } else {
+    finishStage();
+  }
+}
+
+function finishStage() {
+  document.getElementById("quiz").classList.add("hidden");
+
+  const result = document.getElementById("result");
+  result.classList.remove("hidden");
+
+  const percentage = Math.round(score / questions.length * 100);
+  const passed = percentage >= 70;
+
+  document.getElementById("cartoon").textContent =
+    passed ? "🏆" : "💪";
+
+  document.getElementById("cartoonCaption").textContent =
+    passed ? "أحسنت! أنت رائع!" : "واصل التدريب، أنت تستطيع!";
+
+  let message = `
+    <h2>${passed ? "🎉 مبارك! اجتزت المرحلة" : "حاول مرة أخرى"}</h2>
+    <p>المرحلة: ${stages[currentStage].name}</p>
+    <p>إجابات صحيحة: ${score} من ${questions.length}</p>
+    <p>علامتك: ${percentage}%</p>
+  `;
+
+  if (passed && currentStage < 2) {
+    unlocked[currentStage + 1] = true;
+
+    message += `
+      <p style="color:#176b52;font-weight:bold">
+        تم فتح المرحلة التالية بنجاح! 🔓
+      </p>
+      <button class="primary-button"
+        onclick="startStage(${currentStage + 1})">
+        الانتقال إلى ${stages[currentStage + 1].name}
+      </button>
+    `;
+  } else if (passed && currentStage === 2) {
+    message += `
+      <p style="color:#176b52;font-weight:bold">
+        رائع! لقد أكملت جميع مراحل المسابقة. 🏆
+      </p>
+    `;
+  } else {
+    message += `
+      <button class="primary-button"
+        onclick="startStage(${currentStage})">
+        إعادة المرحلة
+      </button>
+    `;
+  }
+
+  message += `
+    <button class="primary-button"
+      onclick="showHome()">
+      العودة إلى القائمة الرئيسية
+    </button>
+  `;
+
+  result.innerHTML = message;
+
+  updateStageButtons();
+}
+
+function showHome() {
+  document.getElementById("quiz").classList.add("hidden");
+  document.getElementById("result").classList.add("hidden");
+  document.getElementById("welcome").classList.remove("hidden");
+
+  document.getElementById("cartoon").textContent = "🧑🏻‍🎓";
+  document.getElementById("cartoonCaption").textContent =
+    "مرحبًا بك! هيا نتعلم التركية معًا";
+
+  updateStageButtons();
+}
+
+updateStageButtons();
 </script>
 
 </body>
